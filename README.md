@@ -9,3 +9,4 @@
 ** 다양한 색상 함수를 사용하기 위한 라이브러리(https://polished.js.org/docs/) - yarn add polished
 
 - 재사용성을 위해 변수별로 분기를 나누는 함수를 선언.
+- 중복되는 항목에 대하여 리펙토링
