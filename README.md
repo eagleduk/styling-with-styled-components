@@ -10,3 +10,7 @@
 
 - 재사용성을 위해 변수별로 분기를 나누는 함수를 선언.
 - 중복되는 항목에 대하여 리펙토링
+
+3. Dialog
+- ThemeProvider 의 내부에는 하나의 component만 가능하다.
+- 기존 component 를 상속받아 새로운 스타일 component 를 만들 수 있다. styled([component])``;
