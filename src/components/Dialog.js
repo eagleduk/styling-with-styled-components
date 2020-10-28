@@ -1,6 +1,43 @@
-import React from "react";
-import styled from "styled-components";
+import React, {useState,useEffect}  from "react";
+import styled, {css,keyframes} from "styled-components";
 import Button from "./Buttton";
+
+const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`;
+
+const fadeOut = keyframes`
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+`;
+
+const sideUp = keyframes`
+    from {
+        transform: translateY(200px);
+    }
+    to {
+        transform: translateY(0px);
+    }
+`;
+
+const sideDown = keyframes`
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(200px);
+    }
+`;
+
 
 const DarkBackground = styled.div`
     position: fixed;
@@ -13,6 +50,15 @@ const DarkBackground = styled.div`
     align-items: center;
     justify-content: center;
     background: rgba(0,0,0,0.8);
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-name: ${fadeIn};
+    animation-fill-mode: forwards;
+
+    ${props => props.disapper && css`
+        animation-name: ${fadeOut}
+    `}
 `;
 
 const DialogBlock = styled.div`
@@ -29,6 +75,15 @@ const DialogBlock = styled.div`
     p {
         font-size: 1.125rem;
     }
+
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-name: ${sideUp};
+    animation-fill-mode: forwards;
+
+    ${props => props.disapper && css`
+        animation-name: ${sideDown}
+    `}
 `;
 
 const ButtonGroup = styled.div`
@@ -54,10 +109,23 @@ function Dialog({
     onConfirm,
     onCancel
 }) {
-    if(!visible) return null;
+
+    const [animate, setAnimate] = useState(false);
+    const [localVisible, setLocalVisible] = useState(visible);
+
+    useEffect(() => {
+        if(localVisible && !visible) {
+            setAnimate(true);
+            setTimeout(() => setAnimate(false),250);
+        }
+        setLocalVisible(visible);
+    }, [localVisible, visible])
+
+    if(!animate && !localVisible) return null;
+
     return (
-        <DarkBackground>
-            <DialogBlock>
+        <DarkBackground disapper={!visible}>
+            <DialogBlock disapper={!visible}>
                 <h3>{title}</h3>
                 <p>{children}</p>
                 <ButtonGroup>

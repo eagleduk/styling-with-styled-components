@@ -65,7 +65,7 @@ function App() {
         </Button>
         </AppBlock>
         <Dialog 
-          title="정말로 삭제?" 
+          title="정말로dd 삭제?" 
           confirmText="삭제" 
           cancelText="취소" 
           visible={dialog}

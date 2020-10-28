@@ -14,3 +14,6 @@
 3. Dialog
 - ThemeProvider 의 내부에는 하나의 component만 가능하다.
 - 기존 component 를 상속받아 새로운 스타일 component 를 만들 수 있다. styled([component])``;
+
+4. 트랜지션(@keyframes)
+- animation
